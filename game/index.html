@@ -9,6 +9,8 @@
     <style>
         body {
             background-color: #e6e7f2;
+            margin-left: 25px;
+            margin-right: 25px;
         }
 
         h1 {
@@ -24,7 +26,15 @@
         blockquote {
             background-color: lightgray;
             padding: 1rem;
-        } 
+        }
+
+        p {
+            margin-left: 25px;
+        }
+
+        img.side {
+            float: right;
+        }
     </style>
 </head>
 
@@ -32,16 +42,13 @@
 <body>
 
     <header>
-        <object data="images/dig-dug.svg" width="350" height="150"></object>
+        <object data="images/dig-dug.svg" width="500"></object>
         <h1>Dig Dug</h1>
         <a href="big/pic1.html">Pic1</a>
     </header>
 
     <main>
-        <img src="images/dig-dug-burnt.png" alt="Dig Dug">
-
-        <img src="images/fygar_inflate.jpg" alt="Big Dig Dug">
-
+        <img src="images/dig-dug-burnt.png" alt="Dig Dug" class="side">
 
         <h2>Publishing Info</h2>
         <ul>
@@ -65,6 +72,8 @@
         <hr>
 
         <h2>Game Categories</h2>
+        <img src="images/fygar_inflate.jpg" alt="Big Dig Dug" class="side">
+
         <ul>
             <li>Genre: Action</li>
             <li>Perspective: Side view</li>
@@ -76,9 +85,9 @@
 
         <h2>Quote</h2>
         <blockquote>
-            This definitely goes under the heading of "Games That Were Made While a Programmer Was on Drugs," or at
+            "This definitely goes under the heading of "Games That Were Made While a Programmer Was on Drugs," or at
             least had a good imagination.
-            <br>And maybe they were into horror movies too.
+            <br>And maybe they were into horror movies too."
         </blockquote>
 
         <hr>
