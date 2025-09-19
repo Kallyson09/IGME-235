@@ -1,0 +1,63 @@
+body {
+    font-family: "Dongle", sans-serif;
+    background: #dbe5e7;
+    color: #816272;
+    margin: 10%;
+}
+
+h1 {
+    font-family: "Jua", sans-serif;
+    font-size: 4.5em;
+    color: #3b4e63;
+}
+
+h2 {
+    font-family: "Jua", sans-serif;
+    font-size: 3em;
+    color: #a55274;
+}
+
+/* 1 class selecter */
+.text {
+    font-size: 2.75em;
+    font-weight: 400;
+    color: #325d6e;
+}
+
+img {
+    float: right;
+}
+
+
+
+/* Fonts */
+
+.dongle-light {
+    font-family: "Dongle", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.dongle-regular {
+    font-family: "Dongle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.dongle-bold {
+    font-family: "Dongle", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.jua-regular {
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+/* use an external CSS file for all of your styles 
+        - at least 2 ID selectors and 2 class selectors */
+
+/* A pleasing (or at least tolerable) color scheme and layout */
