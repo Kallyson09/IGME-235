@@ -2,33 +2,84 @@ body {
     font-family: "Dongle", sans-serif;
     background: #dbe5e7;
     color: #816272;
-    margin: 10%;
+    margin: 5% 8%;
+
+    /* border: 1px solid lightgray; */
 }
 
 h1 {
     font-family: "Jua", sans-serif;
     font-size: 4.5em;
-    color: #3b4e63;
+    color: #1f436d;
+    clear: left;
+    text-align: center;
+    border-bottom: 3px solid #a6b3c2;
+
+    /* border: 1px solid lightgray; */
 }
 
 h2 {
     font-family: "Jua", sans-serif;
     font-size: 3em;
     color: #a55274;
+    clear: left;
+
+    /* border: 1px solid lightgray; */
+}
+
+footer  {
+    clear: both;
 }
 
 /* 1 class selecter */
 .text {
-    font-size: 2.75em;
+    font-size: 2.5em;
     font-weight: 400;
-    color: #325d6e;
+    color: #28728f;
+
+    /* border: 1px solid lightgray; */
 }
 
-img {
+.page {
+    margin: 100px 0px;
+    /* border: 1px solid lightgray; */
+}
+
+/*id selectors */
+#bio_text {
+    margin-right: 50%;
+}
+
+#my_pic {
     float: right;
+    width: 45%;
 }
 
+/* #projects {
+    float: right;
+    width: 45%;
+} */
 
+/* pseudo class selectors */
+a:link {
+    color: #1691b6;
+}
+
+a:visited {
+    color: #7869a3;
+}
+
+a:focus {
+    border: 1px solid #5cb3c9;
+}
+
+a:hover {
+    color: #4bb0cf;
+}
+
+a:active {
+    color: #077fa3;
+}
 
 /* Fonts */
 
@@ -55,9 +106,3 @@ img {
     font-weight: 400;
     font-style: normal;
 }
-
-
-/* use an external CSS file for all of your styles 
-        - at least 2 ID selectors and 2 class selectors */
-
-/* A pleasing (or at least tolerable) color scheme and layout */
