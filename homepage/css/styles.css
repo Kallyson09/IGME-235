@@ -3,8 +3,6 @@ body {
     background: #dbe5e7;
     color: #816272;
     margin: 5% 8%;
-
-    /* border: 1px solid lightgray; */
 }
 
 h1 {
@@ -14,8 +12,6 @@ h1 {
     clear: left;
     text-align: center;
     border-bottom: 3px solid #a6b3c2;
-
-    /* border: 1px solid lightgray; */
 }
 
 h2 {
@@ -23,31 +19,27 @@ h2 {
     font-size: 3em;
     color: #a55274;
     clear: left;
-
-    /* border: 1px solid lightgray; */
 }
 
-footer  {
+footer {
+    border-top: 3px solid #a6b3c2;
     clear: both;
 }
 
-/* 1 class selecter */
+/* Class selectors */
 .text {
     font-size: 2.5em;
     font-weight: 400;
     color: #28728f;
-
-    /* border: 1px solid lightgray; */
 }
 
 .page {
-    margin: 100px 0px;
-    /* border: 1px solid lightgray; */
+    margin: 100px 0px 150px 0px;
 }
 
-/*id selectors */
+/*ID selectors */
 #bio_text {
-    margin-right: 50%;
+    width: 50%;
 }
 
 #my_pic {
@@ -55,12 +47,7 @@ footer  {
     width: 45%;
 }
 
-/* #projects {
-    float: right;
-    width: 45%;
-} */
-
-/* pseudo class selectors */
+/* Pseudo-class selectors */
 a:link {
     color: #1691b6;
 }
@@ -82,7 +69,6 @@ a:active {
 }
 
 /* Fonts */
-
 .dongle-light {
     font-family: "Dongle", sans-serif;
     font-weight: 300;
