@@ -1,5 +1,7 @@
 body {
-    background-color: #e6e7f2;
+    background-image: url("../images/blue-bg.jpg");
+    background-attachment: fixed;
+    background-position: center;
     font-family: Arial, sans-serif;
     font-size: large;
     margin-left: 25px;
@@ -9,17 +11,18 @@ body {
 h1 {
     color: #d6162f;
     font-family: "VT323", monospace;
-    font-size: 3em;
+    font-size: 3.5em;
     border-bottom: 1px solid #2c20d3;
 }
 
 h2 {
     font-family: "VT323", monospace;
+    font-size: 2em;
     color: #2c20d3
 }
 
 blockquote {
-    background-color: #eeafbd;
+    background-color: #ebb9b9;
     padding: 1rem;
 }
 
@@ -27,11 +30,16 @@ p {
     margin-left: 25px;
 }
 
-/* footer {
-} */
+main, header, footer {
+    background-color: #e6e7f2;
+    padding: 1rem;
+    margin: 0 auto;
+    width: 80%;
+}
 
-div.publish {
-    background-color: #b9b6e6;
+footer {
+    background-color: #ccd2e7;
+    padding-bottom: 50px;
 }
 
 img.side {
