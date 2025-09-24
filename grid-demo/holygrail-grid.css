@@ -14,7 +14,8 @@ html {
 
 html,
 body {
-    margin: 0;
+    margin: 10px;
+    background-color: blanchedalmond;
 }
 
 header,
@@ -32,12 +33,67 @@ article {
     padding: .5rem;
 }
 
-nav, aside {
+nav,
+aside {
     background-color: #b5e7a0;
-    border: 1px dotted black; 
+    border: 1px dotted black;
 }
 
 /*****************
 Grid Formatting  
 *****************/
 
+#wrapper {
+    display: grid;
+    height: 100vh;
+    max-width: 1200px;
+    grid-template-rows: 1fr 2fr 10fr 2fr 1fr;
+    grid-template-areas:
+        "header"
+        "sidenav"
+        "article"
+        "sidebar"
+        "footer";
+}
+
+@media only screen and (min-width:760px) {
+
+    html,
+    body {
+        margin: 0px;
+        background-color: blanchedalmond;
+    }
+
+    #wrapper {
+        margin: 2rem auto;
+        grid-template-rows: 1fr 10fr 1fr;
+        grid-template-columns: 20% auto 20%;
+        grid-template-areas:
+            "sidenav  header  header"
+            "sidenav article sidebar"
+            "sidenav  article  footer";
+    }
+}
+
+header {
+    grid-area: header;
+}
+
+article {
+    grid-area: article;
+    overflow: auto;
+    min-height: 300px;
+    background-color: white;
+}
+
+nav {
+    grid-area: sidenav;
+}
+
+aside {
+    grid-area: sidebar;
+}
+
+footer {
+    grid-area: footer;
+}
