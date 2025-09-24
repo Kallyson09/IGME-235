@@ -1,20 +1,3 @@
-h2 {
-    border-bottom: 1px solid red;
-    clear: left;
-}
-
-figure img {
-    float: right;
-    width: 40%;
-    margin: 25px;
-}
-
-.tet {
-    float: left;
-    width: 40%;
-    border: 1px solid lightgray;
-}
-
-footer {
-    clear: left;
+figure {
+    max-width: 650px;
 }
