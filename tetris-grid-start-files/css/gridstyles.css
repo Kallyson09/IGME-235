@@ -22,12 +22,33 @@ ul.menu {
 
 #introduction {
     grid-area: intro;
+    margin: 2rem;
 }
 
 #tetgrid {
     grid-area: playground;
 }
 
+.game {
+  width: 500px;
+  height: 345px;
+  background: url(../images/tetris-logo.png) no-repeat;
+  text-indent: -9999px;
+}
+
 footer {
     grid-area: footer;
+}
+
+@media screen and (min-width: 850px) {
+    #wrapper {
+        display: grid;
+        grid-template-areas:
+            "logo       intro"
+            "menu       menu"
+            "playground playground"
+            "footer     footer";
+        grid-template-columns: [logo]500px;
+        grid-template-rows: [logo]345px;
+    }
 }
