@@ -145,7 +145,6 @@ ul.menu li:hover ul {
     grid-row: 3 / span 3;
 }
 
-
 img {
     transition-property: transform;
     transition-duration: 2s;
@@ -154,8 +153,6 @@ img {
 img:hover {
     transform: rotate(-90deg);
 }
-
-
 
 .game {
     width: 500px;
