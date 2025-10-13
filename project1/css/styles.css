@@ -6,7 +6,7 @@
         "col2"
         "col3"
         "footer";
-    grid-template-rows: 200px repeat(3, 1fr) 5%;
+    grid-template-rows: 200px repeat(3, auto) 5%;
     grid-template-columns: 1fr;
 }
 
@@ -16,28 +16,50 @@ body {
     font-size: 18px;
 }
 
+.trocchi-regular {
+    font-family: "Trocchi", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Eastman";
+    src: url(../media/Eastman-Condensed-Demi-Bold-trial.otf);
+}
+
 header {
-    display: grid;
     grid-area: header;
-    background-color: #d7d1c1;
-    grid-template-rows: 50% 1fr;
+    display: grid;
+    background-color: #dadad0;
+    grid-template-rows: 2fr 1fr;
     grid-template-columns: 1fr;
 }
 
-header img {
+h1 {
+    background: url(../media/SURFBOARD.png) no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    align-self: center;
+    text-indent: -9999px;
     margin: 0px auto;
 }
 
-
+h3 {
+    font-family: "Eastman", sans-serif;
+    font-size: 2rem;
+    color: #0b3ba3;
+}
 
 #text {
-    text-align:center;
+    font-family: "Trocchi", serif;
     font-weight: 600;
     font-size: 2rem;
     color: #af2c1d;
     grid-row: 2/-1;
     align-self: self-end;
-    margin: 5px 0px;
+    text-align: center;
+    margin: 10px 0px;
 }
 
 #col1 {
@@ -52,24 +74,38 @@ header img {
     grid-area: col3;
 }
 
-#col1,
-#col2,
-#col3 {
-    margin: 30px 15px;
+.column {
+    margin: 35px 70px;
     overflow: visible;
+}
+
+.blockImg {
+    object-fit: contain;
+    max-width: 65%;
+    align-self: center;
+}
+
+.first::first-letter {
+    font-weight: 900;
+    font-size: 2.5rem;
+    font-family: sans-serif;
+    margin-right: 5px;
+    line-height: 1rem;
 }
 
 footer {
     grid-area: footer;
+    font-family: "Eastman", sans-serif;
     align-content: center;
-    margin: 0px 15px;
+    margin: 0px 50px;
 }
 
 #end {
+    font-family: serif;
     float: right;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 980px) {
     #wrapper {
         display: grid;
         grid-template-areas:
@@ -87,7 +123,12 @@ footer {
         grid-template-rows: 200px;
     }
 
-    header img {
+    h1 {
+        background: url(../media/SURFBOARD.png) no-repeat;
+        background-size: 100%;
+        text-indent: -9999px;
+
+        max-width: 100%;
         width: 555px;
         height: 200px;
         grid-column: 1 / span 2;
@@ -103,39 +144,29 @@ footer {
         font-size: 2rem;
         padding: 0px 20%;
     }
-}
 
-/* @media screen and (min-width: 850px) {
-    #wrapper {
-        display: grid;
-        grid-template-areas:
-            "header header  header"
-            "col1   col2    col3"
-            "footer footer  footer";
-
-        grid-template-rows: 200px 1fr 5%;
-        grid-template-columns: 1fr 2fr 1fr;
-        margin: 20px 5%;
-    }
-    header {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: 200px;
+    #col2 {
+        float: right;
     }
 
-    header img {
-        width: 555px;
-        height: 200px;
-        grid-column: 1 / 2;
-        grid-row: 1;
-        align-self: center;
+    .blockImg {
+        object-fit: contain;
+        max-width: 100%;
     }
 
-    #text {
-        grid-column: 2/span 2;
-        grid-row: 1;
-        text-align: center;
-        align-self: center;
-        font-size: 2.5rem;
-    } */
+    #col2 img {
+        width: 60%;
+        float: right;
+    }
+
+    .column {
+        margin: 25px 35px;
+        overflow: visible;
+    }
+
+    footer {
+        margin: 0px 35px;
+    }
+
+    
 }
