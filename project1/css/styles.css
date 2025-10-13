@@ -94,6 +94,7 @@ h3 {
 }
 
 footer {
+    border-top: 1px solid #0b3ba3;
     grid-area: footer;
     font-family: "Eastman", sans-serif;
     align-content: center;
@@ -103,6 +104,29 @@ footer {
 #end {
     font-family: serif;
     float: right;
+
+}
+
+/* Link State Placeholders */
+
+a:link {
+    color: #0b3ba3;
+}
+
+a:visited {
+    color: #0b3ba3;
+}
+
+a:focus {
+    color: #0b3ba3;
+}
+
+a:hover {
+    color: #0b3ba3;
+}
+
+a:active {
+    color: #0b3ba3;
 }
 
 @media screen and (min-width: 980px) {
@@ -167,6 +191,4 @@ footer {
     footer {
         margin: 0px 35px;
     }
-
-    
 }
