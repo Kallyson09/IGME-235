@@ -8,29 +8,52 @@
         "footer";
     grid-template-rows: 200px repeat(3, auto) 5%;
     grid-template-columns: 1fr;
+    background-color: #e7e1e8;
 }
 
-body {
-    background-color: #e8e6e1;
-    align-content: center;
-    font-size: 18px;
-}
-
-.trocchi-regular {
-    font-family: "Trocchi", serif;
+/* Headers */
+.im-fell-great-primer-sc-regular {
+    font-family: "IM Fell Great Primer SC", serif;
     font-weight: 400;
     font-style: normal;
 }
 
-@font-face {
-    font-family: "Eastman";
-    src: url(../media/Eastman-Condensed-Demi-Bold-trial.otf);
+/* Regular Body Text */
+.im-fell-english-regular {
+    font-family: "IM Fell English", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.im-fell-english-regular-italic {
+    font-family: "IM Fell English", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Special */
+.jim-nightshade-regular {
+    font-family: "Jim Nightshade", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* .new-tegomin-regular {
+  font-family: "New Tegomin", serif;
+  font-weight: 400;
+  font-style: normal;
+} */
+
+body {
+    background-color: #322834;
+    align-content: center;
+    font-size: 18px;
 }
 
 header {
     grid-area: header;
     display: grid;
-    background-color: #dad0d1;
+    background-color: #a28c9d;
     grid-template-rows: 2fr 1fr;
     grid-template-columns: 1fr;
 }
@@ -46,16 +69,16 @@ h1 {
 }
 
 h3 {
-    font-family: "Eastman", sans-serif;
+    font-family: "IM Fell Great Primer SC", sans-serif;
     font-size: 2rem;
-    color: #0b3ba3;
+    color: #761c46;
 }
 
 #text {
-    font-family: "Trocchi", serif;
-    font-weight: 600;
-    font-size: 2rem;
-    color: #af2c1d;
+    font-family: "Jim Nightshade";
+    font-size: 2.5em;
+
+    color: #422575;
     grid-row: 2/-1;
     align-self: self-end;
     text-align: center;
@@ -79,6 +102,10 @@ h3 {
     overflow: visible;
 }
 
+.column p {
+    font-family: "IM Fell English";
+}
+
 .blockImg {
     object-fit: contain;
     max-width: 65%;
@@ -86,23 +113,24 @@ h3 {
 }
 
 .first::first-letter {
-    font-weight: 900;
+    font-weight: bold;
     font-size: 2.5rem;
-    font-family: sans-serif;
+    font-family: "IM Fell Great Primer SC";
+
     margin-right: 5px;
     line-height: 1rem;
 }
 
 footer {
-    border-top: 1px solid #0b3ba3;
     grid-area: footer;
-    font-family: "Eastman", sans-serif;
+    border-top: 1px solid #0b3ba3;
+    font-family: "IM Fell Great Primer SC";
     align-content: center;
     margin: 0px 50px;
 }
 
 #end {
-    font-family: serif;
+    font-family: "IM Fell English";
     float: right;
 
 }
