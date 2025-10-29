@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Web Apps-4-HW</title>
+    <style>
+        body {
+            border: 1px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My Favorites</h1>
+    <h2>My Favorite Colors</h2>
+
+    <ol id="colorsList">
+
+    </ol>
+
+    <h2>My Favorite Foods</h2>
+
+    <ol id="foodsList">
+
+    </ol>
+
+    <h2>My Favorite Links</h2>
+
+    <ol id="linksList">
+
+    </ol>
+
+    <script>
+        "use strict";
+        let colors = ["blue", "purple", "pink"];
+        let foods = ["chocolate", "boba", "matcha", "tteokbokki", "chinese bbq pork"]; // add some foods
+
+        // Optional - can you figure out how to pull both the key AND the value
+        // from the `links` object literal?
+        let links = {
+            "RIT": "http://www.rit.edu",
+            "RWAG": "https://www.facebook.com/RWAGclub",
+            "New Media Club": "http://newmediaclub.cias.rit.edu"
+        }
+
+        let colorOL = document.querySelector("#colorsList");
+        createList(colorOL, colors);
+
+        let foodOL = document.querySelector("#foodsList");
+        createList(foodOL, foods);
+
+        let linksOL = document.querySelector("#linksList");
+
+        for (let key in links) {
+            let newA = document.createElement('a');
+            newA.href = links[key];
+            newA.innerHTML = key;
+
+            let newLI = document.createElement("li");
+            newLI.appendChild(newA);
+            linksOL.appendChild(newLI);
+        }
+
+        function createList(listElement, array = ["puppydogs", "butterflies", "lollipops"]) {
+            // you write the rest
+            for (let arrayItem of array) {
+                let newLI = document.createElement("li");
+                newLI.innerHTML = arrayItem;
+                listElement.appendChild(newLI);
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>
