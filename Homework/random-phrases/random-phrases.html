@@ -3,18 +3,126 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Random Phrases</title>
+    <title>Random Taylor Swift Lyrics</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+
     <style>
-        
+        .libre-caslon-display-regular {
+            font-family: "Libre Caslon Display", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            background-image: url(https://i.redd.it/1cj845ci51j31.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            font-family: "Libre Caslon Display";
+        }
+
+
+        #wrapper {
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            align-self: center;
+            justify-self: center;
+
+            color: #fffce0;
+            text-shadow: 1px 2px 16px #302057;
+            font-size: 5em;
+        }
+
+        #lyrics {
+            text-align: center;
+            align-self: center;
+            justify-self: center;
+            height: 50vh;
+            width: 80vw;
+
+            color: #fffce0;
+            background-color: #5f285f94;
+            border-radius: 10px;
+            padding: 20px;
+
+            font-size: 2.5em;
+            text-shadow: 1px 1px 6px #191649;
+        }
+
+        button {
+            display: block;
+            text-align: center;
+            align-self: center;
+            justify-self: center;
+
+            border-radius: 10px;
+            background-color: #ffeef2;
+            color: #1270af;
+            border-color: #9b96e7;
+            border-width: 5px;
+
+            width: 300px;
+            height: 75px;
+            padding: .5em;
+            font-size: 2em;
+            font-weight: bold;
+            font-family: "Libre Caslon Display";
+        }
+
+        button:hover {
+            background-color: #f5d8f5;
+        }
+
+        button:active {
+            background-color: #ebb6eb;
+        }
     </style>
 </head>
 
 <body>
-    <h1></h1>
-    
+    <div id="wrapper">
+        <h1>Random Taylor Swift Lyrics</h1>
+
+        <p id="lyrics">
+            Lyrics go here!
+        </p>
+
+        <p><button type="button">Generate</button></p>
+
+    </div>
+
     <script>
         "use strict";
-        
+
+        let displayQuote = (e) => {
+            let lyricsArr =
+                ["You kept me like a secret, but I kept you like an oath — All Too Well",
+                    "Have I known you twenty seconds or twenty years? — Lover",
+                    "You held your pride like you should have held me — The Story of Us",
+                    "But you are what you did / And I'll forget you, but I'll never forgive — The Smallest Man Who Ever Lived",
+                    "You made a rebel of a careless man's careful daughter / You are the best thing that's ever been mine — Mine",
+                    "And you call me up again just to break me like a promise / So casually cruel in the name of being honest — All Too Well"
+                ]
+
+            let lyrics = document.querySelector("#lyrics");
+            let rand = Math.random() * (lyricsArr.length);
+            rand = Math.floor(rand);
+
+            lyrics.innerHTML = lyricsArr[rand];
+        };
+
+        let button = document.querySelector("button");
+
+        button.addEventListener("click", displayQuote);
+
     </script>
 </body>
 
