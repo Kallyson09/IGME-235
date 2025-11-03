@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Apps Tutorial 7 Exercise</title>
+    <style>
+        li {
+            text-transform: capitalize;
+        }
+    </style>
+    <script>
+        "use strict"
+
+        let monsters = [];      // our array of monsters
+
+        /**
+         * Our onload Event.
+         * 
+         */
+        window.onload = function () {
+            makeSampleMonsters();
+            showMonsters('goomba', '#goombas');
+            showMonsters('boo', '#boos');
+            
+        }
+
+        /**
+         * Create a set of Sample Monsters.
+         * 
+         */
+        function makeSampleMonsters() {
+            let monster;
+
+            monster = makeGoomba("John", 20, 30, 100, "goomba");
+            monsters.push(monster);
+            monster = makeGoomba("Fred", 30, 100, 150, "goomba");
+            monsters.push(monster);
+            monster = makeGoomba("Alice", 40, 150, 200, "goomba");
+            monsters.push(monster);
+
+            monster = makeBoo("Sam", 40, 130, 180, "boo");
+            monsters.push(monster);
+            monster = makeBoo("Abigail", 50, 90, 120, "boo");
+            monsters.push(monster);
+            monster = makeBoo("Penny", 60, 70, 110, "boo");
+            monsters.push(monster);
+        }
+
+        /**
+         * Function that shows our monsters
+         * 
+         */
+        function showMonsters(elemType, elemSelector) {
+            let monsterList = document.querySelector(elemSelector);
+
+            for (let i = 0; i < monsters.length; i++) {
+                if(monsters[i].type == elemType){
+                    let liStr = "";
+                    let li = document.createElement("li");
+                    
+                    for (let key in monsters[i]) {
+                        if (typeof monsters[i][key] !== "function") {
+                            liStr += `<b>${key}:</b> ${monsters[i][key]}<br />`;
+                        }
+                    }
+                    li.innerHTML = liStr;
+                    monsterList.appendChild(li);
+                }
+            }
+        }
+
+        /**
+         * create our base monster object with defaults.
+         * 
+         */
+        function createBaseMonster() {
+            return {
+                name: "",
+                hp: 100,
+                speed: 10,
+                score: 100,
+                type: "",
+                status: function () {
+                    console.log("name: " + this.name + ", hp: " + this.hp + ", speed: " + this.speed + ", score: " + this.score + ", type: " + this.type);
+                }
+            }
+        }
+
+        /**
+         * Create a Goomba.
+         * 
+         */
+        function makeGoomba(name, hp, speed, score, type) {
+            let goomba = createBaseMonster();
+            goomba.name = name;
+            goomba.hp = hp;
+            goomba.speed = speed;
+            goomba.score = score;
+            goomba.type = type;
+            goomba.takeDamage = function (dmgVal) {
+                goomba.hp -= dmgVal;
+            }
+            goomba.powerUp = powerUp;
+
+            Object.seal(goomba);
+            return goomba;
+        }
+
+        function makeBoo(name, hp, speed, score, type) {
+            let boo = createBaseMonster();
+            boo.name = name;
+            boo.hp = hp;
+            boo.speed = speed;
+            boo.score = score;
+            boo.type = type;
+            boo.takeDamage = function (dmgVal) {
+                boo.hp -= dmgVal;
+            }
+            boo.powerUp = powerUp;
+
+            Object.seal(boo);
+            return boo;
+        }
+
+        /**
+         * Function that can be used inside a monster object.
+         * 
+         */
+        function powerUp(val) {
+            this.speed += val;
+            this.hp += val
+            this.status();
+        };
+
+    </script>
+</head>
+
+<body>
+    <div id="lineUp">
+        <h1>Goombas</h1>
+        <ul id="goombas">
+        </ul>
+
+        <h1>Boos</h1>
+        <ul id="boos">
+        </ul>
+    </div>
+</body>
+
+</html>
