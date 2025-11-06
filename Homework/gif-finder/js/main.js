@@ -61,27 +61,34 @@ function dataLoaded(e) {
 
     let results = obj.data;
     console.log("results.length: " + results.length);
-    let bigString = "<p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
+    let bigString = "";
 
     for(let i = 0; i < results.length; i++)
     {
         let result = results[i];
 
-        let smallURL = result.images.fixed_width_small.url;
+        let smallURL = result.images.fixed_width_downsampled.url;
 
         if(!smallURL) smallURL = "../images/no-image-found.png";
 
         let url = result.url;
 
-        let line = `<div class = 'result'><img src = '${smallURL}' title = '${result.id}'/>`;
-        line += `<span><a target = '_blank' href='${url}'>View on Giphy</a></span></div>`;
+        let rating = (result.rating ? result.rating : "NA").toUpperCase();
+
+        let line = `<div class = 'result'>`;
+        line += `<img src = '${smallURL}' title = '${result.id}'/>`;
+        line += `<span><a target = '_blank' href='${url}'>View on Giphy</a>`;
+        line += `<p>Rating: ${rating}</p></span>`;
+        line += `</div>`;
 
         bigString += line;
     }
 
     document.querySelector("#content").innerHTML = bigString;
 
-    document.querySelector("#status").innerHTML = "<b>Success!</b>";
+    document.querySelector("#status").innerHTML = "<b>Success!</b><p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
+
+
 
 }
 
