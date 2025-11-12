@@ -11,7 +11,6 @@ function searchButtonClicked() {
     const _URL = "https://api.disneyapi.dev/character?name=";
 
     let url = _URL;
-    // url += "api_key=" + GIPHY_KEY;
 
     let term = document.querySelector("#searchterm").value;
     displayTerm = term;
@@ -58,6 +57,7 @@ function dataLoaded(e) {
     }
 
     let results = obj.data;
+    // let resultsFiltered = results.filter(obj => { return obj.year <= 1970 });
     console.log("results.length: " + results.length);
     let bigString = "";
 
