@@ -8,12 +8,10 @@ let displayTerm = "";
 function searchButtonClicked() {
     console.log("searchButtonClicked() called");
 
-    const GIPHY_URL = "https://api.giphy.com/v1/gifs/search?";
+    const _URL = "https://api.disneyapi.dev/character?name=";
 
-    let GIPHY_KEY = "5PuWjWVnwpHUQPZK866vd7wQ2qeCeqg7";
-
-    let url = GIPHY_URL;
-    url += "api_key=" + GIPHY_KEY;
+    let url = _URL;
+    // url += "api_key=" + GIPHY_KEY;
 
     let term = document.querySelector("#searchterm").value;
     displayTerm = term;
@@ -24,7 +22,7 @@ function searchButtonClicked() {
 
     if (term.length < 1) return;
 
-    url += "&q=" + term;
+    url += term;
 
     let limit = document.querySelector("#limit").value;
 
@@ -66,22 +64,29 @@ function dataLoaded(e) {
     for(let i = 0; i < results.length; i++)
     {
         let result = results[i];
-
-        let smallURL = result.images.fixed_width_downsampled.url;
-
-        if(!smallURL) smallURL = "../images/no-image-found.png";
-
-        let url = result.url;
-
-        let rating = (result.rating ? result.rating : "NA").toUpperCase();
-
+        
         let line = `<div class = 'result'>`;
-        line += `<img src = '${smallURL}' title = '${result.id}'/>`;
-        line += `<span><a target = '_blank' href='${url}'>View on Giphy</a>`;
-        line += `<p>Rating: ${rating}</p></span>`;
+        line += `<img src = '${result.imageUrl}' title = '${result.id}'/>`;
+        line += `<span><p>${result.name}</p>`;
+        line += `<a target = '_blank' href='${result.imageUrl}'>View Image</a></span>`;
         line += `</div>`;
 
         bigString += line;
+
+        //let smallURL = result.images.fixed_width_downsampled.url;
+        //if(!smallURL) smallURL = "../images/no-image-found.png";]
+        
+        // let url = result.url;
+
+        // let rating = (result.rating ? result.rating : "NA").toUpperCase();
+
+        // let line = `<div class = 'result'>`;
+        // line += `<img src = '${url}' title = '${result.id}'/>`;
+        // line += `<span><a target = '_blank' href='${url}'>More Info</a>`;
+        // line += `<p>Rating: ${rating}</p></span>`;
+        // line += `</div>`;
+
+        // bigString += line;
     }
 
     document.querySelector("#content").innerHTML = bigString;
