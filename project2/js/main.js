@@ -1,10 +1,7 @@
-// 1
 window.onload = (e) => { document.querySelector("#search").onclick = searchButtonClicked };
 
-// 2
 let displayTerm = "";
 
-// 3
 function searchButtonClicked() {
     console.log("searchButtonClicked() called");
 
@@ -57,25 +54,61 @@ function dataLoaded(e) {
     }
 
     let results = obj.data;
+
+    // Limit results based on 1. filters and 2. results
+
     // let resultsFiltered = results.filter(obj => { return obj.year <= 1970 });
-    console.log("results.length: " + results.length);
+
+    // Limit the results shown
+    let limitAmount;
+    for (let i = 0; i < document.querySelector("#limit").options.length; i++) {
+        if (document.querySelector("#limit").options[i].selected) {
+            //set values to be shown equal to its value
+            limitAmount = document.querySelector("#limit").options[i].value;
+            break;
+        }
+    }
+    // console.log("limit amount: " + limitAmount);
+
+
+    // console.log("results.length: " + results.length);
     let bigString = "";
 
-    for(let i = 0; i < results.length; i++)
-    {
-        let result = results[i];
-        
-        let line = `<div class = 'result'>`;
-        line += `<img src = '${result.imageUrl}' title = '${result.id}'/>`;
-        line += `<span><p>${result.name}</p>`;
-        line += `<a target = '_blank' href='${result.imageUrl}'>View Image</a></span>`;
-        line += `</div>`;
+    if (limitAmount < results.length) {
+        for (let i = 0; i < limitAmount; i++) {
+            let result = results[i];
 
-        bigString += line;
+            let line = `<div class = 'result'>`;
+            line += `<img src = '${result.imageUrl}' title = '${result.id}'/>`;
+            line += `<span><p>${result.name}</p>`;
+            line += `<a target = '_blank' href='${result.imageUrl}'>View Image</a></span>`;
+            line += `</div>`;
+
+            bigString += line;
+        }
+
+        document.querySelector("#status").innerHTML = "<p>Showing " + limitAmount + " results for '" + displayTerm + "'</i></p>";
+
+    }
+    else {
+        for (let i = 0; i < results.length; i++) {
+            let result = results[i];
+
+            let line = `<div class = 'result'>`;
+            line += `<img src = '${result.imageUrl}' title = '${result.id}'/>`;
+            line += `<span><p>${result.name}</p>`;
+            line += `<a target = '_blank' href='${result.imageUrl}'>View Image</a></span>`;
+            line += `</div>`;
+
+            bigString += line;
+        }
+
+        document.querySelector("#status").innerHTML = "<p>Showing " + results.length + " results for '" + displayTerm + "'</i></p>";
+
     }
 
+
     document.querySelector("#content").innerHTML = bigString;
-    document.querySelector("#status").innerHTML = "<p>Showing " + results.length + " results for '" + displayTerm + "'</i></p>";
 }
 
 function dataError(e) {
