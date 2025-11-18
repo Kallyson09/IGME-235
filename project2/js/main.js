@@ -55,6 +55,12 @@ function dataLoaded(e) {
 
     let results = obj.data;
 
+    //Sort if chose option
+    if (document.querySelector("#sortLimit").options[1].selected)
+    {
+        results = results.reverse();
+    }
+
     // Limit results based on 1. filters and 2. results
 
     // let resultsFiltered = results.filter(obj => { return obj.year <= 1970 });
@@ -68,10 +74,7 @@ function dataLoaded(e) {
             break;
         }
     }
-    // console.log("limit amount: " + limitAmount);
 
-
-    // console.log("results.length: " + results.length);
     let bigString = "";
 
     if (limitAmount < results.length) {

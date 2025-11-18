@@ -20,14 +20,14 @@
         <div id="widgetSearchGroup">
             <div class="widgets">
                 Search
-                <input id="searchterm" type="text" size="45" maxlength="45" autofocus
-                    value="" placeholder="Enter a Character (ex. Mickey Mouse)" />
+                <input id="searchterm" type="text" size="45" maxlength="45" autofocus value=""
+                    placeholder="Enter a Character (ex. Mickey Mouse)" />
             </div>
 
             <div class="widgets">
                 Filter
                 <select id="filterLimit">
-                    <option value="None"selected>None</option>
+                    <option value="None" selected>None</option>
                     <option value="Films">Films</option>
                     <option value="Short Films">Short Films</option>
                     <option value="Video Games">Video Games</option>
@@ -44,7 +44,15 @@
                 </select>
             </div>
 
-            <button type="button" id="search" class="blue">Search</button>
+            <div class="widgets">
+                Sort
+                <select id="sortLimit">
+                    <option value="A-Z">A-Z</option>
+                    <option value="Z-A">Z-A</option>
+                </select>
+                <button type="button" id="search" class="blue">Search</button>
+
+            </div>
         </div>
     </header>
 
