@@ -26,7 +26,7 @@
 
 body {
     background-image: url(../media/tiled_preview_square_20250811_164812.webp);
-    background-size: contain;
+    background-size: 35%;
     background-color: #d7e3e9;
     background-blend-mode: soft-light;
 }
@@ -57,6 +57,11 @@ h2 {
     font-size: 3rem;
     margin: 20px;
     color: #0e0075;
+}
+
+hr {
+    border-top: 1px solid #4b6ea2;
+    border-bottom: none;
 }
 
 .widgets {
@@ -99,6 +104,7 @@ select {
     flex-direction: column;
     padding: 0px 16px;
     border-radius: 16px;
+    border: 1px solid rgba(90, 107, 155, 0.853);
     box-shadow: 0px 10px 20px 0px rgba(27, 109, 147, 0.4);
 }
 
@@ -134,7 +140,7 @@ button {
     font-family: "New Waltograph UI";
 
     color: #fff;
-    text-shadow: 0 1px 3px rgba(3, 0, 103, 0.9);
+    text-shadow: 0 1px 3px #030067e6;
     text-decoration: none;
 }
 
@@ -176,36 +182,6 @@ a:hover {
 a:active {
     color: #82f3f9
 }
-
-
-/* .result {
-    position: relative;
-    height: 175px;
-    width: 100px;
-    float: left;
-    border: 1px solid gray;
-    padding: 5px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-}
-
-.result img {
-    position: absolute;
-    left: 5px;
-    bottom: 5px;
-    display: block;
-
-}
-
-.result span {
-    font-size: 12px;
-    font-weight: bold;
-    display: block;
-}
-
-.result audio {
-    width: 130px;
-} */
 
 @media screen and (min-width: 900px) {
 
