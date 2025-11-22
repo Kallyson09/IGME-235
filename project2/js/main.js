@@ -2,6 +2,22 @@ window.onload = (e) => { document.querySelector("#search").onclick = searchButto
 
 let displayTerm = "";
 
+// Store search term in local storage
+const searchField = document.querySelector("#searchterm");
+const prefix = "alk7915";
+const searchKey = prefix + "searchterm";
+
+const storedSearch = localStorage.getItem(searchKey);
+
+if (storedSearch) {
+    searchField.value = storedSearch;
+}
+else {
+    searchField.value = "";
+}
+
+searchField.onchange = e => { localStorage.setItem(searchKey, e.target.value); };
+
 function searchButtonClicked() {
     console.log("searchButtonClicked() called");
 
@@ -10,6 +26,7 @@ function searchButtonClicked() {
     let url = _URL;
 
     let term = document.querySelector("#searchterm").value;
+
     displayTerm = term;
 
     term = term.trim();
@@ -20,11 +37,7 @@ function searchButtonClicked() {
 
     url += term;
 
-    let limit = document.querySelector("#limit").value;
-
     document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b>";
-
-    // console.log(url);
 
     getData(url);
 }
@@ -62,7 +75,7 @@ function dataLoaded(e) {
 
     //if filter is selected, set which it will be
     let filterChosen;
-        
+
     // Identify which filter has been chosen
     if (!document.querySelector("#filterLimit").options[0].selected) {
         for (let i = 0; i < document.querySelector("#filterLimit").options.length; i++) {
@@ -71,12 +84,12 @@ function dataLoaded(e) {
                 break;
             }
         }
-        
+
         // Loop through array and if the property != null/empty, add 
         console.log("filter chosen: " + filterChosen);
         console.log(Object.getOwnPropertyDescriptor(results[0], filterChosen).value);
         let descriptor = Object.getOwnPropertyDescriptor(results[0], filterChosen).value;
-        results = results.filter(obj => { return (Object.getOwnPropertyDescriptor(obj, filterChosen).value.length > 0)});
+        results = results.filter(obj => { return (Object.getOwnPropertyDescriptor(obj, filterChosen).value.length > 0) });
     }
 
 
@@ -100,7 +113,7 @@ function dataLoaded(e) {
 
             let line = `<div class = 'result'>`;
             line += `<img src = '${result.imageUrl}' title = '${result.name}'/>`;
-            line += `<span><p>${result.name}</p>`;
+            line += `<span><h3>${result.name}</h3>`;
             line += `<p>Films: ${result.films}</p>`;
             line += `<p>Short Films: ${result.shortFilms}</p>`;
             line += `<p>TV Shows: ${result.tvShows}</p>`;
@@ -121,7 +134,7 @@ function dataLoaded(e) {
 
             let line = `<div class = 'result'>`;
             line += `<img src = '${result.imageUrl}' title = '${result.name}'/>`;
-            line += `<span><p>${result.name}</p>`;
+            line += `<span><h3>${result.name}</h3>`;
             line += `<p>Films: ${result.films}</p>`;
             line += `<p>Short Films: ${result.shortFilms}</p>`;
             line += `<p>TV Shows: ${result.tvShows}</p>`;
@@ -136,7 +149,6 @@ function dataLoaded(e) {
         document.querySelector("#status").innerHTML = "<p>Showing " + results.length + " results for '" + displayTerm + "'</i></p>";
 
     }
-
 
     document.querySelector("#content").innerHTML = bigString;
 }

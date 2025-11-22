@@ -44,24 +44,31 @@ header {
 
 header h1 {
     color: #0e0075;
-
     text-align: center;
     margin: 0px;
-
     font-size: 10vw;
     font-family: "New Waltograph", serif;
 }
 
 h2 {
+    display: inline-block;
     font-family: "New Waltograph";
     font-size: 3rem;
     margin: 20px;
     color: #0e0075;
 }
 
+#doc {
+    font-family: "New Waltograph";
+    font-size: 3rem;
+    margin: 20px;
+    float: right;
+}
+
 hr {
     border-top: 1px solid #4b6ea2;
     border-bottom: none;
+    margin: auto 20px;
 }
 
 .widgets {
@@ -124,6 +131,11 @@ a {
     font-family: "Port Lligat Sans";
 }
 
+.result h3 {
+    font-weight: bold;
+    font-size: 1.75rem;
+    color: rgb(3, 0, 165);
+}
 
 button {
     display: inline-block;

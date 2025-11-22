@@ -5,7 +5,6 @@
     <meta charset="utf-8" />
     <title>Disney Character Finder</title>
     <link rel="stylesheet" href="styles/style.css">
-    <script src="js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -20,8 +19,7 @@
         <div id="widgetSearchGroup">
             <div class="widgets">
                 Search
-                <input id="searchterm" type="text" size="45" maxlength="45" autofocus value=""
-                    placeholder="Enter a Character (ex. Mickey Mouse)" />
+                <input id="searchterm" type="text" size="45" maxlength="45" placeholder="Enter a Character (ex. Mickey Mouse)" />
             </div>
 
             <div class="widgets">
@@ -61,10 +59,17 @@
 
     <hr>
 
-    <h2>Results</h2>
+    <div id="headerLine">
+        <h2>Results</h2>
+        <a id="doc" href="https://people.rit.edu/alk7915/235/project2/doc.html"
+            title="https://people.rit.edu/alk7915/235/project2/doc.html">Documentation</a>
+    </div>
+
     <div id="content">
         <p>No data yet!</p>
     </div>
 </body>
+
+<script src="js/main.js"></script>
 
 </html>
