@@ -1,0 +1,93 @@
+.jersey-20-regular {
+    font-family: "Jersey 20";
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'Jersey 20';
+    background: #1e1b2f;
+    color: #c4e7f7;
+    font-size: 2rem;
+}
+
+header {
+    color: #ffffff;
+    text-align: center;
+    padding: 2.5rem;
+    background: #2a2442;
+    border-bottom: 3px solid #7667fccb;
+}
+
+h1 {
+    margin: 0;
+    font-size: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+main.grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1300px;
+    margin: auto;
+}
+
+section {
+    background: #2c2646;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #6ab2d4a6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+h3 {
+    color: #8ee9e4;
+}
+
+h2 {
+    color: #d7b4ff;
+}
+
+ul,
+ol {
+    padding-left: 1.4rem;
+}
+
+p,
+li {
+    line-height: 1.6;
+}
+
+img {
+    width: 45%;
+    margin: auto;
+}
+
+#mockup {
+    display: block;
+    gap: 2rem;
+    padding: 1rem 0px 2.5rem 0px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+#blockImgs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#mockup h2 {
+    padding-left: 2rem;
+}
+
+footer {
+    text-align: center;
+    margin: 2rem auto;
+}
