@@ -35,6 +35,7 @@ async function loadImages() {
         spaceship: "images/spaceship.png",
         explosions: "images/explosions.png",
         move: "images/move.png",
+        background: "images/Room-bg.png",
     });
 
     // The second argument is a callback function that is called whenever the loader makes progress.
@@ -56,6 +57,7 @@ async function setup() {
 
     // #1 - Create the `start` scene
     startScene = new PIXI.Container();
+
     stage.addChild(startScene);
 
     // #2 - Create the main `game` scene and make it invisible
@@ -73,33 +75,35 @@ async function setup() {
 
     function createLabelsAndButtons() {
         let buttonStyle = {
-            fill: 0xff0000,
+            fill: 0x8ee9e4,
             fontSize: 48,
-            fontFamily: "Verdana",
+            fontFamily: "Jersey 20",
         };
 
         // Make top start label
-        let startLabel1 = new PIXI.Text("Circle Blast!", {
+        let startLabel1 = new PIXI.Text("Haunted House\nHijinks", {
             fill: 0xffffff,
-            fontSize: 96,
-            fontFamily: "Verdana",
-            stroke: 0xff0000,
+            fontSize: 72,
+            fontFamily: "Jersey 20",
+            stroke: 0x4d13b0,
             strokeThickness: 6,
+            align: 'center',
         });
-        startLabel1.x = 50;
+        startLabel1.x = (sceneWidth - startLabel1.width) / 2;
         startLabel1.y = 120;
+
         startScene.addChild(startLabel1);
 
         // Make middle start label
-        let startLabel2 = new PIXI.Text("R U worthy..?", {
-            fill: 0xffffff,
+        let startLabel2 = new PIXI.Text("Escape the haunted house and chase\naway the ghosts that roam the halls...", {
+            fill: 0xdfdddf,
             fontSize: 32,
-            fontFamily: "Verdana",
-            fontStyle: "italic",
-            stroke: 0xff0000,
+            fontFamily: "Jersey 20",
+            stroke: 0x4d13b0,
             strokeThickness: 6,
+            align: 'center',
         });
-        startLabel2.x = 185;
+        startLabel2.x = (sceneWidth - startLabel2.width) / 2;
         startLabel2.y = 300;
         startScene.addChild(startLabel2);
 
@@ -119,7 +123,19 @@ async function setup() {
             startScene.visible = false;
             gameOverScene.visible = false;
             gameScene.visible = true;
-            app.view.onclick = fireBullet;
+
+            //add background
+            let bg = PIXI.Sprite.from("images/Room-bg.png");
+            bg.width = 600;
+            bg.height = 600;
+            bg.zIndex = -5;      
+            bg.texture.source.scaleMode = 'nearest';      
+
+            gameScene.addChild(bg);
+
+            // app.view.onclick = fireBullet;
+            document.querySelector("body").addEventListener("keydown", fireBullet);
+
             levelNum = 1;
             score = 0;
             life = 100;
@@ -137,9 +153,9 @@ async function setup() {
         // Set up gameScene
         let textStyle = {
             fill: 0xffffff,
-            fontSize: 18,
-            fontFamily: "Verdana",
-            stroke: 0xff0000,
+            fontSize: 30,
+            fontFamily: "Jersey 20",
+            stroke: 0x4d13b0,
             strokeThickness: 4,
         };
 
@@ -161,11 +177,11 @@ async function setup() {
 
         // 3 - set up `gameOverScene`
         // 3A - make game over text
-        let gameOverText = new PIXI.Text("Game Over!\n        :-O", {
+        let gameOverText = new PIXI.Text("Game Over!", {
             fill: 0xffffff,
             fontSize: 64,
-            fontFamily: "Verdana",
-            stroke: 0xff0000,
+            fontFamily: "Jersey 20",
+            stroke: 0x4d13b0,
             strokeThickness: 6,
         });
         gameOverText.x = sceneWidth / 2 - gameOverText.width / 2;
@@ -176,8 +192,8 @@ async function setup() {
         gameOverScoreLabel = new PIXI.Text("Your final score: ", {
             fill: 0xffffff,
             fontSize: 32,
-            fontFamily: "Verdana",
-            stroke: 0xff0000,
+            fontFamily: "Jersey 20",
+            stroke: 0x4d13b0,
             strokeThickness: 3,
         });
         gameOverScoreLabel.x = sceneWidth / 2 - gameOverScoreLabel.width / 2;
@@ -365,15 +381,16 @@ async function setup() {
         gameScene.addChild(b);
         shootSound.play();
 
-        if (score >= 5) {
-            let b2 = new Bullet(0xffffff, ship.x - 10, ship.y);
-            bullets.push(b2);
-            gameScene.addChild(b2);
+        // maybe for powerup...
+        // if (score >= 5) {
+        //     let b2 = new Bullet(0xffffff, ship.x - 10, ship.y);
+        //     bullets.push(b2);
+        //     gameScene.addChild(b2);
 
-            let b3 = new Bullet(0xffffff, ship.x + 10, ship.y);
-            bullets.push(b3);
-            gameScene.addChild(b3);
-        }
+        //     let b3 = new Bullet(0xffffff, ship.x + 10, ship.y);
+        //     bullets.push(b3);
+        //     gameScene.addChild(b3);
+        // }
     }
 
     function loadSpriteSheet() {
