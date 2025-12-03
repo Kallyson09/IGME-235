@@ -10,6 +10,7 @@ body {
     background: #1e1b2f;
     color: #c4e7f7;
     font-size: 2rem;
+    text-align: center;
 }
 
 header {
@@ -36,6 +37,7 @@ main.grid {
     padding: 2rem;
     max-width: 1300px;
     margin: auto;
+    text-align: left;
 }
 
 section {
@@ -85,6 +87,32 @@ img {
 
 #mockup h2 {
     padding-left: 2rem;
+}
+
+a {
+    font-family: "Jersey 20";
+    font-size: 3rem;
+    margin: auto;
+}
+
+a:link {
+    color: rgb(150, 195, 255);
+}
+
+a:visited {
+    color: rgb(110, 98, 240);
+}
+
+a:focus {
+    color: rgb(145, 108, 255);
+}
+
+a:hover {
+    color: rgb(178, 225, 255);
+}
+
+a:active {
+    color: rgb(153, 197, 255);
 }
 
 footer {

@@ -1,3 +1,15 @@
+/*MILESTONE 1 TO DO LIST:
+
+- Fix ghost die animation
+- Change sounds
+- Fix movement input
+- Fix fire bullet input
+- Change background for main screen
+- Change background for Game Over screen
+- Add instructions for keyboard input
+- Change cursor style
+
+*/
 // We will use `strict mode`, which helps us by having the browser catch many common JS mistakes
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 "use strict";
@@ -96,7 +108,7 @@ async function setup() {
         startScene.addChild(startLabel1);
 
         // Make middle start label
-        let startLabel2 = new PIXI.Text("Escape the haunted house and chase\naway the ghosts that roam the halls...", {
+        let startLabel2 = new PIXI.Text("Escape the haunted house and chase\naway the mischievous ghosts that\nroam the halls...", {
             fill: 0xdfdddf,
             fontSize: 32,
             fontFamily: "Jersey 20",
