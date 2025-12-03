@@ -32,7 +32,8 @@ loadImages();
 async function loadImages() {
     // https://pixijs.com/8.x/guides/components/assets#loading-multiple-assets
     PIXI.Assets.addBundle("sprites", {
-        spaceship: "images/spaceship.png",
+        spaceship: "images/main-char.png",
+        ghost: "images/ghost.png",
         explosions: "images/explosions.png",
         move: "images/move.png",
         background: "images/Room-bg.png",
@@ -225,6 +226,7 @@ async function setup() {
 
     // #5 - Create ship
     ship = new Ship(assets.spaceship);
+    ship.texture.source.scaleMode = 'nearest';
     gameScene.addChild(ship);
 
     // #6 - Load Sounds
@@ -246,16 +248,18 @@ async function setup() {
     // #8 - Start update loop
 
     function loadLevel() {
-        createCircles(levelNum * 5);
+        createCircles(levelNum * 2);
     }
 
     function createCircles(numCircles = 10) {
         for (let i = 0; i < numCircles; i++) {
-            let c = new Circle(10, 0xffff00);
-            c.x = Math.random() * (sceneWidth - 50) + 25;
-            c.y = Math.random() * (sceneHeight - 400) + 25;
-            circles.push(c);
-            gameScene.addChild(c);
+            // create the ghost and give a random xy pos
+            let g = new Ghost(assets.ghost);
+            g.x = Math.random() * (sceneWidth - 50) + 25;
+            g.y = Math.random() * (sceneHeight - 400) + 25;
+            g.texture.source.scaleMode = 'nearest';
+            circles.push(g);
+            gameScene.addChild(g);
         }
     }
 
@@ -286,12 +290,12 @@ async function setup() {
         // #3 - Move Circles
         for (let c of circles) {
             c.move(dt);
-            if (c.x <= c.radius || c.x >= sceneWidth - c.radius) {
+            if (c.x <= (c.width/3) || c.x >= sceneWidth - (c.width/3)) {
                 c.reflectX();
                 c.move(dt);
             }
 
-            if (c.y <= c.radius || c.y >= sceneHeight - c.radius) {
+            if (c.y <= (c.height/3) || c.y >= sceneHeight - (c.height/3)) {
                 c.reflectY();
                 c.move(dt);
             }

@@ -2,7 +2,7 @@ class Ship extends PIXI.Sprite {
     constructor(texture, x = 0, y = 0) {
         super(texture);
         this.anchor.set(0.5, 0.5);
-        this.scale.set(0.1);
+        this.scale.set(3.75);
         this.x = x;
         this.y = y;
     }
@@ -16,6 +16,32 @@ class Circle extends PIXI.Graphics {
         this.x = x;
         this.y = y;
         this.radius = radius;
+        this.fwd = getRandomUnitVector();
+        this.speed = 50;
+        this.isAlive = true;
+    }
+
+    move(dt = 1 / 60) {
+        this.x += this.fwd.x * this.speed * dt;
+        this.y += this.fwd.y * this.speed * dt;
+    }
+
+    reflectX() {
+        this.fwd.x *= -1;
+    }
+
+    reflectY() {
+        this.fwd.y *= -1;
+    }
+}
+
+class Ghost extends PIXI.Sprite {
+    constructor(texture, x = 100, y = 100) {
+        super(texture);
+        this.anchor.set(0.5, 0.5);
+        this.scale.set(3);
+        this.x = x;
+        this.y = y;
         this.fwd = getRandomUnitVector();
         this.speed = 50;
         this.isAlive = true;
