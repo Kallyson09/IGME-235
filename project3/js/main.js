@@ -20,7 +20,7 @@ let aliens = [];
 let explosions = [];
 let explosionTextures;
 let score = 0;
-let life = 100;
+let life = 5;
 let levelNum = 1;
 let paused = true;
 
@@ -135,11 +135,12 @@ async function setup() {
             gameScene.addChild(bg);
 
             // app.view.onclick = fireBullet;
+            
             document.querySelector("body").addEventListener("keydown", fireBullet);
 
             levelNum = 1;
             score = 0;
-            life = 100;
+            life = 5;
             increaseScoreBy(0);
             decreaseLifeBy(0);
             ship.x = 300;
@@ -173,8 +174,6 @@ async function setup() {
         lifeLabel.y = 26;
         gameScene.addChild(lifeLabel);
         decreaseLifeBy(0);
-
-
 
         // 3 - set up `gameOverScene`
         // 3A - make game over text
@@ -221,7 +220,7 @@ async function setup() {
     function decreaseLifeBy(value) {
         life -= value;
         life = parseInt(life);
-        lifeLabel.text = `Life:     ${life}%`;
+        lifeLabel.text = `Lives Left:     ${life}`;
     }
 
     // #5 - Create ship
@@ -327,7 +326,7 @@ async function setup() {
                 hitSound.play();
                 gameScene.removeChild(c);
                 c.isAlive = false;
-                decreaseLifeBy(20);
+                decreaseLifeBy(1);
             }
         }
 
@@ -380,6 +379,7 @@ async function setup() {
     function fireBullet() {
         if (paused) return;
 
+        //check which key is pressed then move
         let b = new Bullet(0xffffff, ship.x, ship.y);
         bullets.push(b);
         gameScene.addChild(b);
