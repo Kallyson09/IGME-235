@@ -47,7 +47,7 @@ async function loadImages() {
     PIXI.Assets.addBundle("sprites", {
         spaceship: "images/main-char.png",
         ghost: "images/ghost.png",
-        explosions: "images/explosions.png",
+        explosions: "images/ghost-spritesheet.png",
         move: "images/move.png",
         background: "images/Room-bg.png",
     });
@@ -328,7 +328,7 @@ async function setup() {
             for (let b of bullets) {
                 if (rectsIntersect(c, b)) {
                     fireballSound.play();
-                    createExplosion(c.x, c.y, 64, 64);
+                    createExplosion(c.x, c.y, 21, 21);
                     gameScene.removeChild(c);
                     c.isAlive = false;
                     gameScene.removeChild(b);
@@ -395,6 +395,7 @@ async function setup() {
 
     function fireBullet(e) {
         if (paused) return;
+
         //check which key is pressed then spawn bullet
         if (e.key === "ArrowUp") {
             let b = new Bullet(0xffffff, ship.x, ship.y);
@@ -436,20 +437,18 @@ async function setup() {
         //     bullets.push(b3);
         //     gameScene.addChild(b3);
         // }
-        console.log(bullets);
     }
 
-
     function loadSpriteSheet() {
-        let spriteSheet = PIXI.Texture.from("images/explosions.png");
-        let width = 64;
-        let height = 64;
-        let numFrames = 16;
+        let spriteSheet = PIXI.Texture.from("images/ghost-spritesheet.png");
+        let width = 21;
+        let height = 21;
+        let numFrames = 8;
         let textures = [];
         for (let i = 0; i < numFrames; i++) {
             let frame = new PIXI.Texture({
                 source: spriteSheet,
-                frame: new PIXI.Rectangle(i * width, 64, width, height),
+                frame: new PIXI.Rectangle(i * width, 21, width, height),
             });
 
             textures.push(frame);
@@ -461,9 +460,15 @@ async function setup() {
         let w2 = frameWidth / 2;
         let h2 = frameHeight / 2;
         let expl = new PIXI.AnimatedSprite(explosionTextures);
-        expl.x = x - w2;
-        expl.y = y - h2;
-        expl.animationSpeed = 1 / 7;
+        expl.x = x - (w2*3);
+        expl.y = y - (h2*3);
+        expl.animationSpeed = 1 / 12;
+
+        expl.texture.source.scaleMode = 'nearest';
+        expl.alpha = 0.7;
+        expl.width *= 3;
+        expl.height *= 3;
+
         expl.loop = false;
         expl.onComplete = () => gameScene.removeChild(expl);
         explosions.push(expl);
