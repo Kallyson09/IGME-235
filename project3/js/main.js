@@ -39,6 +39,13 @@ let paused = true;
 
 let gameOverScoreLabel;
 
+const moveKeys = {
+    w: false,
+    a: false,
+    s: false,
+    d: false,
+}
+
 // Load all assets
 loadImages();
 
@@ -150,10 +157,20 @@ async function setup() {
             // app.view.onclick = fireBullet;
 
             //FIRE BULLET
-            document.addEventListener("keydown", (e) => { fireBullet(e); });
+            window.addEventListener("keydown", (e) => { fireBullet(e); });
 
             // WASD MOVEMENT -- has to listen for key up and down!
-            document.addEventListener("keydown", (e) => { charMove(e)});
+            window.addEventListener("keydown", (e) => {
+                if (e.key in moveKeys) {
+                    moveKeys[e.key] = true;
+                }
+            });
+
+            window.addEventListener("keyup", (e) => {
+                if (e.key in moveKeys) {
+                    moveKeys[e.key] = false;
+                }
+            });
 
 
             levelNum = 1;
@@ -305,7 +322,22 @@ async function setup() {
         // ship.y = clamp(newY, 0 + h2, sceneHeight - h2);
 
         //check which key is pressed then spawn bullet
-
+        if (moveKeys["w"]) {
+            console.log("w pressed!");
+            ship.y += -6;
+        }
+        else if (moveKeys["a"]) {
+            console.log("a pressed!");
+            ship.x += -6;
+        }
+        else if (moveKeys["s"]) {
+            console.log("s pressed!");
+            ship.y += 6;
+        }
+        else if (moveKeys["d"]) {
+            console.log("d pressed!");
+            ship.x += 6;
+        }
 
 
         // #3 - Move Circles
@@ -439,21 +471,6 @@ async function setup() {
         //     bullets.push(b3);
         //     gameScene.addChild(b3);
         // }
-    }
-
-    function charMove(e) {
-        if (e.key === "w") {
-            console.log("w pressed!");
-        }
-        else if (e.key === "a") {
-            console.log("a pressed!");
-        }
-        else if (e.key === "s") {
-            console.log("s pressed!");
-        }
-        else if (e.key === "d") {
-            console.log("d pressed!");
-        }
     }
 
     function loadSpriteSheet() {
