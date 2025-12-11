@@ -69,14 +69,19 @@ class Bullet extends PIXI.Graphics {
         this.x = x;
         this.y = y;
 
-        this.fwd = { x: 0, y: -1};
+        this.fwd = { x: 0, y: -1 };
         this.speed = 400;
         this.isAlive = true;
         Object.seal(this);
     }
 
-    move(dt = 1/60) {
+    move(dt = 1 / 60) {
         this.x += this.fwd.x * this.speed * dt;
         this.y += this.fwd.y * this.speed * dt;
+    }
+
+    setFwd(xFwd, yFwd) {
+        this.fwd.x = xFwd;
+        this.fwd.y = yFwd;
     }
 }

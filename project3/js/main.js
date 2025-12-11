@@ -1,7 +1,7 @@
 /*MILESTONE 1 TO DO LIST:
 
 - Fix ghost die animation
-- Change sounds
+- Change sounds/ Add background music
 - Fix movement input
 - Fix fire bullet input
 - Change background for main screen
@@ -10,6 +10,7 @@
 - Change cursor style
 
 */
+
 // We will use `strict mode`, which helps us by having the browser catch many common JS mistakes
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 "use strict";
@@ -141,14 +142,18 @@ async function setup() {
             let bg = PIXI.Sprite.from("images/Room-bg.png");
             bg.width = 600;
             bg.height = 600;
-            bg.zIndex = -5;      
-            bg.texture.source.scaleMode = 'nearest';      
+            bg.zIndex = -5;
+            bg.texture.source.scaleMode = 'nearest';
 
             gameScene.addChild(bg);
 
             // app.view.onclick = fireBullet;
-            
-            document.querySelector("body").addEventListener("keydown", fireBullet);
+
+            //FIRE BULLET
+            document.addEventListener("keydown", (e) => { fireBullet(e); });
+
+            // WASD MOVEMENT
+            // document.addEventListener("keydown", (e) => { charMove(e); });
 
             levelNum = 1;
             score = 0;
@@ -288,25 +293,25 @@ async function setup() {
         let amt = 6 * dt;//at 60fps would move 10%/update
 
         //lerp
-        let newX = lerp(ship.x, mousePosition.x, amt);
-        let newY = lerp(ship.y, mousePosition.y, amt);
+        // let newX = lerp(ship.x, mousePosition.x, amt);
+        // let newY = lerp(ship.y, mousePosition.y, amt);
 
         //keep ship on screen
         let w2 = ship.width / 2;
         let h2 = ship.height / 2;
 
-        ship.x = clamp(newX, 0 + w2, sceneWidth - w2);
-        ship.y = clamp(newY, 0 + h2, sceneHeight - h2);
+        // ship.x = clamp(newX, 0 + w2, sceneWidth - w2);
+        // ship.y = clamp(newY, 0 + h2, sceneHeight - h2);
 
         // #3 - Move Circles
         for (let c of circles) {
             c.move(dt);
-            if (c.x <= (c.width/3) || c.x >= sceneWidth - (c.width/3)) {
+            if (c.x <= (c.width / 3) || c.x >= sceneWidth - (c.width / 3)) {
                 c.reflectX();
                 c.move(dt);
             }
 
-            if (c.y <= (c.height/3) || c.y >= sceneHeight - (c.height/3)) {
+            if (c.y <= (c.height / 3) || c.y >= sceneHeight - (c.height / 3)) {
                 c.reflectY();
                 c.move(dt);
             }
@@ -388,15 +393,39 @@ async function setup() {
         gameOverScoreLabel.x = sceneWidth / 2 - gameOverScoreLabel.width / 2;
     }
 
-    function fireBullet() {
+    function fireBullet(e) {
         if (paused) return;
-
-        //check which key is pressed then move
-        let b = new Bullet(0xffffff, ship.x, ship.y);
-        bullets.push(b);
-        gameScene.addChild(b);
-        shootSound.play();
-
+        //check which key is pressed then spawn bullet
+        if (e.key === "ArrowUp") {
+            let b = new Bullet(0xffffff, ship.x, ship.y);
+            bullets.push(b);
+            gameScene.addChild(b);
+            shootSound.play();
+        }
+        else if (e.key === "ArrowDown")
+        {
+            let b = new Bullet(0xffffff, ship.x, ship.y);
+            b.setFwd(0, 1);
+            bullets.push(b);
+            gameScene.addChild(b);
+            shootSound.play();
+        }
+        else if (e.key === "ArrowLeft")
+        {
+            let b = new Bullet(0xffffff, ship.x, ship.y);
+            b.setFwd(-1, 0);
+            bullets.push(b);
+            gameScene.addChild(b);
+            shootSound.play();
+        }
+        else if (e.key === "ArrowRight")
+        {
+            let b = new Bullet(0xffffff, ship.x, ship.y);
+            b.setFwd(1, 0);
+            bullets.push(b);
+            gameScene.addChild(b);
+            shootSound.play();
+        }
         // maybe for powerup...
         // if (score >= 5) {
         //     let b2 = new Bullet(0xffffff, ship.x - 10, ship.y);
@@ -407,7 +436,9 @@ async function setup() {
         //     bullets.push(b3);
         //     gameScene.addChild(b3);
         // }
+        console.log(bullets);
     }
+
 
     function loadSpriteSheet() {
         let spriteSheet = PIXI.Texture.from("images/explosions.png");
