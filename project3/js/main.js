@@ -152,8 +152,9 @@ async function setup() {
             //FIRE BULLET
             document.addEventListener("keydown", (e) => { fireBullet(e); });
 
-            // WASD MOVEMENT
-            // document.addEventListener("keydown", (e) => { charMove(e); });
+            // WASD MOVEMENT -- has to listen for key up and down!
+            document.addEventListener("keydown", (e) => { charMove(e)});
+
 
             levelNum = 1;
             score = 0;
@@ -303,6 +304,10 @@ async function setup() {
         // ship.x = clamp(newX, 0 + w2, sceneWidth - w2);
         // ship.y = clamp(newY, 0 + h2, sceneHeight - h2);
 
+        //check which key is pressed then spawn bullet
+
+
+
         // #3 - Move Circles
         for (let c of circles) {
             c.move(dt);
@@ -397,30 +402,27 @@ async function setup() {
         if (paused) return;
 
         //check which key is pressed then spawn bullet
-        if (e.key === "ArrowUp") {
+        if (e.key === "ArrowUp" && !e.repeat) {
             let b = new Bullet(0xffffff, ship.x, ship.y);
             bullets.push(b);
             gameScene.addChild(b);
             shootSound.play();
         }
-        else if (e.key === "ArrowDown")
-        {
+        else if (e.key === "ArrowDown" && !e.repeat) {
             let b = new Bullet(0xffffff, ship.x, ship.y);
             b.setFwd(0, 1);
             bullets.push(b);
             gameScene.addChild(b);
             shootSound.play();
         }
-        else if (e.key === "ArrowLeft")
-        {
+        else if (e.key === "ArrowLeft" && !e.repeat) {
             let b = new Bullet(0xffffff, ship.x, ship.y);
             b.setFwd(-1, 0);
             bullets.push(b);
             gameScene.addChild(b);
             shootSound.play();
         }
-        else if (e.key === "ArrowRight")
-        {
+        else if (e.key === "ArrowRight" && !e.repeat) {
             let b = new Bullet(0xffffff, ship.x, ship.y);
             b.setFwd(1, 0);
             bullets.push(b);
@@ -437,6 +439,21 @@ async function setup() {
         //     bullets.push(b3);
         //     gameScene.addChild(b3);
         // }
+    }
+
+    function charMove(e) {
+        if (e.key === "w") {
+            console.log("w pressed!");
+        }
+        else if (e.key === "a") {
+            console.log("a pressed!");
+        }
+        else if (e.key === "s") {
+            console.log("s pressed!");
+        }
+        else if (e.key === "d") {
+            console.log("d pressed!");
+        }
     }
 
     function loadSpriteSheet() {
@@ -460,8 +477,8 @@ async function setup() {
         let w2 = frameWidth / 2;
         let h2 = frameHeight / 2;
         let expl = new PIXI.AnimatedSprite(explosionTextures);
-        expl.x = x - (w2*3);
-        expl.y = y - (h2*3);
+        expl.x = x - (w2 * 3);
+        expl.y = y - (h2 * 3);
         expl.animationSpeed = 1 / 12;
 
         expl.texture.source.scaleMode = 'nearest';
