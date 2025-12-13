@@ -48,6 +48,11 @@ section {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
+#doc {
+    margin: 2rem 8vw;
+    text-align: left;
+}
+
 h3 {
     color: #8ee9e4;
 }
@@ -89,10 +94,10 @@ img {
     padding-left: 2rem;
 }
 
-a {
+nav a {
     font-family: "Jersey 20";
     font-size: 3rem;
-    margin: auto;
+    margin: 2rem;
 }
 
 a:link {

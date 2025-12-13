@@ -1,9 +1,6 @@
 /*MILESTONE 1 TO DO LIST:
 
-- Fix ghost die animation
 - Change sounds/ Add background music
-- Fix movement input
-- Fix fire bullet input
 - Change background for main screen
 - Change background for Game Over screen
 - Add instructions for keyboard input
@@ -55,7 +52,7 @@ async function loadImages() {
         spaceship: "images/main-char.png",
         ghost: "images/ghost.png",
         explosions: "images/ghost-spritesheet.png",
-        move: "images/move.png",
+        cursor: "images/cursor-new.png",
         background: "images/Room-bg.png",
     });
 
@@ -179,7 +176,7 @@ async function setup() {
             increaseScoreBy(0);
             decreaseLifeBy(0);
             ship.x = 300;
-            ship.y = 550;
+            ship.y = 400;
             loadLevel();
 
             setTimeout(() => {
@@ -289,8 +286,16 @@ async function setup() {
         for (let i = 0; i < numCircles; i++) {
             // create the ghost and give a random xy pos
             let g = new Ghost(assets.ghost);
-            g.x = Math.random() * (sceneWidth - 50) + 25;
-            g.y = Math.random() * (sceneHeight - 400) + 25;
+
+            //spawn on outer edges of canvas
+            while (g.x > 200 && g.x < 400) {
+                g.x = Math.random() * (sceneWidth - 200) + 25;
+            }
+
+            while (g.y > 200 && g.y < 400) {
+                g.y = Math.random() * (sceneHeight - 200) + 25;
+            }
+
             g.texture.source.scaleMode = 'nearest';
             circles.push(g);
             gameScene.addChild(g);
@@ -318,9 +323,6 @@ async function setup() {
         let w2 = ship.width / 2;
         let h2 = ship.height / 2;
 
-        // ship.x = clamp(newX, 0 + w2, sceneWidth - w2);
-        // ship.y = clamp(newY, 0 + h2, sceneHeight - h2);
-
         //check which key is pressed then spawn bullet
         if (moveKeys["w"]) {
             console.log("w pressed!");
@@ -338,6 +340,9 @@ async function setup() {
             console.log("d pressed!");
             ship.x += 6;
         }
+
+        ship.x = clamp(ship.x, 0 + w2, sceneWidth - w2);
+        ship.y = clamp(ship.y, 0 + h2, sceneHeight - h2);
 
 
         // #3 - Move Circles
