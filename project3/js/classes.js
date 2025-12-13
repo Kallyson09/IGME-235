@@ -16,7 +16,7 @@ class Ghost extends PIXI.Sprite {
         this.x = x;
         this.y = y;
         this.fwd = getRandomUnitVector();
-        this.speed = 50;
+        this.speed = Math.random() * (85 - 40) + 40;
         this.isAlive = true;
     }
 

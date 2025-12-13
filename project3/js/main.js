@@ -21,7 +21,8 @@ let assets;
 
 // game variables
 let startScene;
-let gameScene, ship, scoreLabel, lifeLabel, shootSound, hitSound, fireballSound;
+let gameScene, ship, scoreLabel, lifeLabel;
+let menuMusic, gameMusic, shootSound, hitSound, fireballSound;
 let gameOverScene;
 
 let circles = [];
@@ -33,9 +34,11 @@ let score = 0;
 let life = 5;
 let levelNum = 1;
 let paused = true;
+let moveSpeed = 4;
 
 let gameOverScoreLabel;
 
+// helper to keep track of what buttons are being pressed
 const moveKeys = {
     w: false,
     a: false,
@@ -54,6 +57,8 @@ async function loadImages() {
         explosions: "images/ghost-spritesheet.png",
         cursor: "images/cursor-new.png",
         background: "images/Room-bg.png",
+        mainBackground: "images/start-screen.png",
+        lightsout: "images/lights-out.png"
     });
 
     // The second argument is a callback function that is called whenever the loader makes progress.
@@ -72,6 +77,7 @@ async function setup() {
     stage = app.stage;
     sceneWidth = app.renderer.width;
     sceneHeight = app.renderer.height;
+    app.renderer.background.color = 0x030121;
 
     // #1 - Create the `start` scene
     startScene = new PIXI.Container();
@@ -87,6 +93,16 @@ async function setup() {
     gameOverScene = new PIXI.Container();
     gameOverScene.visible = false;
     stage.addChild(gameOverScene);
+
+    //load start bg
+    let startBg = PIXI.Sprite.from("images/start-screen.png");
+    startBg.width = 526;
+    startBg.height = 526;
+    startBg.x = (sceneWidth / 2) - (startBg.width / 2);
+    startBg.y = (sceneHeight / 2) - (startBg.height / 2);
+    startBg.zIndex = -5;
+    startBg.texture.source.scaleMode = 'nearest';
+    stage.addChild(startBg);
 
     // #4 - Create labels for all 3 scenes
     createLabelsAndButtons();
@@ -108,7 +124,7 @@ async function setup() {
             align: 'center',
         });
         startLabel1.x = (sceneWidth - startLabel1.width) / 2;
-        startLabel1.y = 120;
+        startLabel1.y = 20;
 
         startScene.addChild(startLabel1);
 
@@ -122,13 +138,13 @@ async function setup() {
             align: 'center',
         });
         startLabel2.x = (sceneWidth - startLabel2.width) / 2;
-        startLabel2.y = 300;
+        startLabel2.y = 430;
         startScene.addChild(startLabel2);
 
         // Make start game button
         let startButton = new PIXI.Text("Enter, if you dare!", buttonStyle);
         startButton.x = sceneWidth / 2 - startButton.width / 2;
-        startButton.y = sceneHeight - 100;
+        startButton.y = sceneHeight - 70;
         startButton.interactive = true;
         startButton.buttonMode = true;
         startButton.on("pointerup", startGame);
@@ -148,10 +164,7 @@ async function setup() {
             bg.height = 600;
             bg.zIndex = -5;
             bg.texture.source.scaleMode = 'nearest';
-
             gameScene.addChild(bg);
-
-            // app.view.onclick = fireBullet;
 
             //FIRE BULLET
             window.addEventListener("keydown", (e) => { fireBullet(e); });
@@ -169,6 +182,9 @@ async function setup() {
                 }
             });
 
+            //stop menu music & play game music
+            menuMusic.stop();
+            gameMusic.play();
 
             levelNum = 1;
             score = 0;
@@ -197,6 +213,7 @@ async function setup() {
         scoreLabel = new PIXI.Text("", textStyle);
         scoreLabel.x = 5;
         scoreLabel.y = 5;
+        scoreLabel.zIndex = 2;
         gameScene.addChild(scoreLabel);
         increaseScoreBy(0);
 
@@ -204,6 +221,7 @@ async function setup() {
         lifeLabel = new PIXI.Text("", textStyle);
         lifeLabel.x = 5;
         lifeLabel.y = 26;
+        lifeLabel.zIndex = 2;
         gameScene.addChild(lifeLabel);
         decreaseLifeBy(0);
 
@@ -211,25 +229,25 @@ async function setup() {
         // 3A - make game over text
         let gameOverText = new PIXI.Text("Game Over!", {
             fill: 0xffffff,
-            fontSize: 64,
+            fontSize: 80,
             fontFamily: "Jersey 20",
             stroke: 0x4d13b0,
             strokeThickness: 6,
         });
         gameOverText.x = sceneWidth / 2 - gameOverText.width / 2;
-        gameOverText.y = sceneHeight / 2 - 160;
+        gameOverText.y = 45;
         gameOverScene.addChild(gameOverText);
 
         // display final score
         gameOverScoreLabel = new PIXI.Text("Your final score: ", {
             fill: 0xffffff,
-            fontSize: 32,
+            fontSize: 48,
             fontFamily: "Jersey 20",
             stroke: 0x4d13b0,
             strokeThickness: 3,
         });
         gameOverScoreLabel.x = sceneWidth / 2 - gameOverScoreLabel.width / 2;
-        gameOverScoreLabel.y = sceneHeight / 2 + 20;
+        gameOverScoreLabel.y = sceneWidth - 150;
         gameOverScene.addChild(gameOverScoreLabel);
 
         // 3B - make "play again?" button
@@ -260,6 +278,13 @@ async function setup() {
     ship.texture.source.scaleMode = 'nearest';
     gameScene.addChild(ship);
 
+    let lightout = PIXI.Sprite.from("images/lights-out.png");
+    lightout.width = 1200;
+    lightout.height = 1200;
+    lightout.zIndex = 1;
+    lightout.texture.source.scaleMode = 'nearest';
+    gameScene.addChild(lightout);
+
     // #6 - Load Sounds
     shootSound = new Howl({
         src: ["sounds/shoot.wav"],
@@ -273,27 +298,47 @@ async function setup() {
         src: ["sounds/fireball.mp3"],
     });
 
+    // Main menu music
+    menuMusic = new Howl({
+        src: ["sounds/halloween-171093.mp3"]
+    });
+
+    menuMusic.play();
+
+    // Background music
+    gameMusic = new Howl({
+        src: ["sounds/haunted-mansion-289059.mp3"]
+    });
+
+
+
+
     // #7 - Load sprite sheet
     explosionTextures = loadSpriteSheet();
 
     // #8 - Start update loop
 
     function loadLevel() {
-        createCircles(levelNum * 2);
+        createGhosts(levelNum * 2);
     }
 
-    function createCircles(numCircles = 10) {
-        for (let i = 0; i < numCircles; i++) {
+    function createGhosts(numGhosts = 10) {
+        for (let i = 0; i < numGhosts; i++) {
             // create the ghost and give a random xy pos
             let g = new Ghost(assets.ghost);
 
-            //spawn on outer edges of canvas
-            while (g.x > 200 && g.x < 400) {
-                g.x = Math.random() * (sceneWidth - 200) + 25;
-            }
+            // Spawn on a random side of screen
+            let randomSide = Math.floor(Math.random() * 2)
 
-            while (g.y > 200 && g.y < 400) {
-                g.y = Math.random() * (sceneHeight - 200) + 25;
+            // Left side
+            if (randomSide == 0) {
+                g.x = 25;
+                g.y = Math.random() * (sceneWidth - 25) + 25;
+            }
+            // Right side
+            else {
+                g.x = sceneWidth - 25;
+                g.y = Math.random() * (sceneWidth - 25) + 25;
             }
 
             g.texture.source.scaleMode = 'nearest';
@@ -305,6 +350,9 @@ async function setup() {
     function gameLoop() {
         if (paused) return;
 
+        if (!gameMusic.playing()) {
+            gameMusic.play();
+        }
         // #1 - Calculate "delta time"
         let dt = 1 / app.ticker.FPS;
         if (dt > 1 / 12) dt = 1 / 12;
@@ -315,35 +363,35 @@ async function setup() {
 
         let amt = 6 * dt;//at 60fps would move 10%/update
 
-        //lerp
-        // let newX = lerp(ship.x, mousePosition.x, amt);
-        // let newY = lerp(ship.y, mousePosition.y, amt);
 
-        //keep ship on screen
-        let w2 = ship.width / 2;
-        let h2 = ship.height / 2;
 
-        //check which key is pressed then spawn bullet
+        //check which key is pressed then move ship
         if (moveKeys["w"]) {
             console.log("w pressed!");
-            ship.y += -6;
+            ship.y += -moveSpeed;
         }
         else if (moveKeys["a"]) {
             console.log("a pressed!");
-            ship.x += -6;
+            ship.x += -moveSpeed;
         }
         else if (moveKeys["s"]) {
             console.log("s pressed!");
-            ship.y += 6;
+            ship.y += moveSpeed;
         }
         else if (moveKeys["d"]) {
             console.log("d pressed!");
-            ship.x += 6;
+            ship.x += moveSpeed;
         }
 
+        // //keep ship on screen
+        let w2 = ship.width / 2;
+        let h2 = ship.height / 2;
         ship.x = clamp(ship.x, 0 + w2, sceneWidth - w2);
         ship.y = clamp(ship.y, 0 + h2, sceneHeight - h2);
 
+        //update lights out sprite
+        lightout.x = ship.x - (sceneWidth);
+        lightout.y = ship.y - (sceneHeight);
 
         // #3 - Move Circles
         for (let c of circles) {
@@ -415,6 +463,10 @@ async function setup() {
 
     function end() {
         paused = true;
+
+        gameMusic.stop();
+        menuMusic.play();
+
 
         // clear level
         circles.forEach((c) => gameScene.removeChild(c));
